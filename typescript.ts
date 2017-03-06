@@ -95,3 +95,71 @@ class Animal {
 }
 
 //create animal objects
+var spot = new Animal("Spot", "John");
+spot.ownerInfo();
+
+spot.weight = 100;
+Animal.howManyAnimals();
+
+//inheritance
+class Dog extends Animal {
+    constructor(name: string, owner: string) {
+        super(name, owner);
+        Dog.numOfAnimals++;
+    }
+}
+
+var doggy = new Dog("Doggy", "Jim");
+
+(doggy instanceof Animal); //returns true
+('name' in doggy); //returns true
+
+//interface
+interface Vehicle {
+    drive(): any;
+}
+
+class Car implements Vehicle {
+    constructor(private wheel: number) {
+    }
+
+    drive(): void {
+        console.log('start driving');
+    }
+}
+
+//generic functions
+//we use data type markers, pass any data types in
+function getType<T>(val: T): string {
+    return typeof(val);
+}
+
+//work with anything with Vehicle interface
+function getWheels<w extends Vehicle>(veh: w): number {
+    return veh.drive();
+}
+
+var car = new Car(4);
+getWheels(car);
+
+//generic Classes
+class GenericNumber<T> {
+    add: (val1: T, val2: T) => T;
+}
+
+var someNumber = new GenericNumber<number>();
+
+//destructuring - objects and arrays
+var randVals = {x: 1, y: 2, z: 3};
+
+var {x, y, z} = randVals;
+
+[x, y, z] = [z, y, x];
+
+//enums
+enum Emotions {
+    Happy = 1,
+    Sad,
+    Angry
+}
+
